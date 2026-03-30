@@ -1,0 +1,31 @@
+---
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Install Apache2
+  ansible.builtin.apt:
+    name: apache2
+    state: present
+
+- name: Enable Apache proxy module
+  ansible.builtin.apache2_module:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ apache_modules }}"
+  notify: apache2 reload
+
+- name: Copy template
+  ansible.builtin.template:
+    src: "{{ apache_vhost_templates }}/{{ vhost_name}}"
+    dest: /etc/apache2/sites-available/
+    owner: root
+    group: root
+    mode: '0644'
+  notify: apache2 reload
+
+- name: Enable site 
+  ansible.builtin.shell: | 
+    sudo a2ensite {{ vhost_name }}
+  notify: apache2 restart
