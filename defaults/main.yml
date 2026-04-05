@@ -1,7 +1,5 @@
-#SPDX-License-Identifier: MIT-0
 ---
-ssl: False
-app_domains: 
+app_domains:
   - alexandrelesieur.com
 apache_vhosts: []
 apache_modules:
@@ -17,5 +15,6 @@ app_root_path: /ssh
 listen_port: 443
 apache_vhost_templates: templates/apache/vhosts/
 vhost_name: test.conf
+ssl: false
 ssl_certificate_file: /home/
 ssl_certificate_key_file: /home/test

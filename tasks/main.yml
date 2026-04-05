@@ -1,7 +1,7 @@
 ---
 - name: Update apt cache
   ansible.builtin.apt:
-    update_cache: yes
+    update_cache: true 
     cache_valid_time: 3600
 
 - name: Install Apache2
@@ -25,7 +25,7 @@
     mode: '0644'
   notify: apache2 reload
 
-- name: Enable site 
-  ansible.builtin.shell: | 
+- name: Enable site
+  ansible.builtin.shell: |
     sudo a2ensite {{ vhost_name }}
   notify: apache2 restart
