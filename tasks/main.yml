@@ -3,11 +3,13 @@
   ansible.builtin.apt:
     update_cache: true 
     cache_valid_time: 3600
+  tags: apache
 
 - name: Install Apache2
   ansible.builtin.apt:
     name: apache2
     state: present
+  tags: apache
 
 - name: Enable Apache proxy module
   ansible.builtin.apache2_module:
@@ -15,6 +17,7 @@
     state: present
   loop: "{{ apache_modules }}"
   notify: apache2 reload
+  tags: apache
 
 - name: Copy template
   ansible.builtin.template:
@@ -24,8 +27,10 @@
     group: root
     mode: '0644'
   notify: apache2 reload
+  tags: apache
 
 - name: Enable site
   ansible.builtin.shell: |
     sudo a2ensite {{ vhost_name }}
   notify: apache2 restart
+  tags: apache
