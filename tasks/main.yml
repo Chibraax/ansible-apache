@@ -21,11 +21,12 @@
 
 - name: Copy template
   ansible.builtin.template:
-    src: "{{ apache_vhost_templates }}/{{ vhost_name}}"
+    src: "{{ apache_vhost_templates }}/{{ item }}"
     dest: /etc/apache2/sites-available/
     owner: root
     group: root
     mode: '0644'
+  loop: vhost_conf
   notify: apache2 reload
   tags: apache
 

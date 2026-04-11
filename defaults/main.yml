@@ -14,7 +14,8 @@ server_admin: webmaster@localhost
 app_root_path: /ssh
 listen_port: 443
 apache_vhost_templates: templates/apache/vhosts/
-vhost_name: test.conf
+vhost_conf:
+  - test.conf
 ssl: false
 ssl_certificate_file: /home/
 ssl_certificate_key_file: /home/test
