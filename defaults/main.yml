@@ -1,6 +1,6 @@
 ---
 app_domains:
-  - alexandrelesieur.com
+  - test.com
 apache_vhosts: []
 apache_modules:
   - proxy_http
